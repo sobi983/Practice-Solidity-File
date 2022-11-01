@@ -1,7 +1,8 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.0;
-import "hardhat/console.sol";
-import '@openzeppelin/contracts/utils/Strings.sol';
+// import "hardhat/console.sol";
+// import '@openzeppelin/contracts/utils/Strings.sol';
+
 
 
 // 1.State variables and Local Variables of structs, array are always stored in storage by default.
@@ -1078,16 +1079,21 @@ import '@openzeppelin/contracts/utils/Strings.sol';
 
 //Mapping to Array 
 // contract sobi{
-//     mapping(uint256 => address[]) public  previousOwners;
+//     mapping(address => uint[]) public  previousOwners;
+//     address so;
 
-//     function set(address _user) public {
-//         previousOwners[1].push(_user) ;
+//     function setAddress(address i) public {
+//       so = i;
 //     }
 
-//     function get() public view returns(address[] memory USERS){
-//         address[] memory user = new address[](previousOwners[1].length);
+//     function set(uint _user) public {
+//         previousOwners[so].push(_user) ;
+//     }
+
+//     function get(address o) public view returns(uint[] memory USERS){
+//         uint[] memory user = new uint[](previousOwners[o].length);
 //         for(uint i=0; i< user.length; i++){
-//             user[i] = previousOwners[1][i];
+//             user[i] = previousOwners[o][i];
 //         }
 //         USERS = user;
 //     }
@@ -1240,4 +1246,96 @@ import '@openzeppelin/contracts/utils/Strings.sol';
 //        obj.set(o,ci);
 //      }
 // }
+
+
+// this. use case in the return function
+// contract sobi{
+
+//   uint public weeee;
+//   function get() public view returns(uint){
+//     return block.timestamp;
+
+//   }
+
+//   function set() public {
+//     weeee = this.get();
+//   }
+
+// }
+
+
+//Cecking gas efficiency of the custom error and the onlyowner
+// error NotOwnerError();
+// contract sobi{
+
+
+//   uint256 public age;
+//   address owner = 0x5B38Da6a701c568545dCfcB03FcB875f56beddC4; 
+
+//     modifier onlyOwner() {
+//       require(msg.sender == owner, "Not owner");
+//       _;
+//     }
+
+//     function set(uint _age) public onlyOwner{
+//       age = _age;
+//     }
+
+//     function sett(uint _age) public {
+//       if(msg.sender!=owner){revert NotOwnerError();}
+//       age = _age;
+//     }
+// }
+
+
+//Calldata vs Memory difference
+// contract sobi {
+    
+    
+//     function memoryTest(string memory _exampleString) public pure returns (string memory) {
+//       _exampleString = "example";  // You can modify memory
+//       string memory newString = _exampleString;  // You can use memory within a function's logic
+//       return newString;  // You can return memory
+//     }
+    
+//     function calldataTest(string calldata _exampleString) external pure returns (string memory) {
+//       // cannot modify _exampleString
+//       // but can return it
+//       return _exampleString;
+//     }
+// }
+
+
+//Pssing structure into the function parameter and output of multi mapping from the structure
+// contract sobi{
+//   struct user_data{
+//     uint age;
+//     string name;
+//   }
+
+//   mapping( address => mapping (address=> user_data[])) data;
+
+//   function set1(address user, uint age, string calldata _name) public {
+//     data[msg.sender][user].push(user_data(age, _name));
+//   }
+
+//   function set2(address c,user_data memory _name) public{
+//     data[msg.sender][c].push(user_data(_name.age,_name.name));
+//   }
+
+//   function getData(address partner, address client) public view returns(user_data[] memory USERS_DATA){
+//     uint a= data[partner][client].length;
+//     user_data[] memory record= new user_data[](a);
+
+//     for(uint i=0; i < a; ++i){
+//       record[i] = data[partner][client][i];
+//     }
+//     USERS_DATA = record;
+//   }
+// }
+
+
+
+
+
 
