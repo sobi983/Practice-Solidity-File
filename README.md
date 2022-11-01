@@ -87,6 +87,7 @@ pragma solidity ^0.8.0;
 //       name.pop();
 //     }
 
+
 //     //the length of the string array cannot be called in string. it is executable in uint but not in string so this is the simple way of retruning all string array 
 //     function length() public view returns(uint){
 //         return name.length;
